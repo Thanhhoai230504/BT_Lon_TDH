@@ -13,7 +13,6 @@ import time
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def preprocess_image(img):
-    """Xử lý ảnh để OCR chính xác hơn"""
     img = img.convert("L") 
     img = np.array(img)
 
@@ -80,8 +79,7 @@ def tra_cuu_phat_nguoi(bien_so):
                 xpath_result = '//*[@id="bodyPrint123"]'
                 WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, xpath_result)))
                 element_result = driver.find_element(By.XPATH, xpath_result)
-                # print("Kết quả tìm được:")
-                # print(element_result.text)
+                
                 if "Không tìm thấy kết quả" in element_result.text:
                     print("Không tìm thấy vi phạm phạt nguội")
                 else:
