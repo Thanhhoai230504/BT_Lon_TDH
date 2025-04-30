@@ -139,4 +139,4 @@ tra-cuu-phat-nguoi/
 
 ## 6. Liên hệ
 
-Nếu bạn gặp vấn đề hoặc cần hỗ trợ, vui lòng liên hệ qua email: `nguyenthanhhoai230504.com`.
+Nếu bạn gặp vấn đề hoặc cần hỗ trợ, vui lòng liên hệ qua email: `nguyenthanhhoai230504@gmail.com`.
