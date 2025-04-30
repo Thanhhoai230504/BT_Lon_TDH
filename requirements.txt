@@ -1,0 +1,7 @@
+selenium
+pytesseract
+opencv-python
+numpy
+Pillow
+schedule
+python-dotenv
