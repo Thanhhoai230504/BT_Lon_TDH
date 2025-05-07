@@ -15,7 +15,6 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 def preprocess_image(img):
     img = img.convert("L") 
     img = np.array(img)
-
     img = cv2.resize(img, None, fx=4, fy=4, interpolation=cv2.INTER_CUBIC)
     img = cv2.bilateralFilter(img, 11, 17, 17)
     img = cv2.adaptiveThreshold(
@@ -33,22 +32,25 @@ def preprocess_image(img):
 
 def tra_cuu_phat_nguoi(bien_so):
     driver = webdriver.Chrome()
+    #1. Vào website đã chọn.
     driver.get("https://www.csgt.vn/tra-cuu-phuong-tien-vi-pham.html")
 
     while True:
         try:
-
+            #2. Nhập các thông tin Biển số xe
             input_bien_so = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "BienKiemSoat")))
             input_bien_so.clear()
             input_bien_so.send_keys(bien_so)
 
+            #3. Chọn loại xe.
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="formBSX"]/div[2]/div[2]/select'))).click()
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="formBSX"]/div[2]/div[2]/select/option[2]'))).click()
 
+            #4. Lấy hình captcha và xử lý để lấy mã capchat.
             captcha_img = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "imgCaptcha")))
-            captcha_png = captcha_img.screenshot_as_png
-            img = Image.open(BytesIO(captcha_png))
-            img_processed = preprocess_image(img)
+            captcha_png = captcha_img.screenshot_as_png 
+            img = Image.open(BytesIO(captcha_png))  
+            img_processed = preprocess_image(img)  
 
             captcha_code = pytesseract.image_to_string(
                 img_processed,
@@ -57,6 +59,7 @@ def tra_cuu_phat_nguoi(bien_so):
 
             print(f"[Captcha OCR]: {captcha_code}")
 
+            #5. Nhập mã captcha vào ô 
             captcha_input = driver.find_element(By.NAME, "txt_captcha")
             captcha_input.clear()
             captcha_input.send_keys(captcha_code)
@@ -74,10 +77,10 @@ def tra_cuu_phat_nguoi(bien_so):
                     continue  
             except:
                 pass  
-
+            #6. Kiểm tra kết quả phạt nguội.
             try:
                 xpath_result = '//*[@id="bodyPrint123"]'
-                WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, xpath_result)))
+                WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, xpath_result)))  
                 element_result = driver.find_element(By.XPATH, xpath_result)
                 
                 if "Không tìm thấy kết quả" in element_result.text:
@@ -95,4 +98,8 @@ def tra_cuu_phat_nguoi(bien_so):
 
     time.sleep(3)
     driver.quit()
+
+
+
+
 

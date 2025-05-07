@@ -34,7 +34,7 @@ Dự án này tự động tra cứu thông tin phạt nguội phương tiện g
 
 ```bash
 git clone https://github.com/Thanhhoai230504/BT_Lon_TDH.git
-cd BT_LON
+cd BT_LON_TDH
 ```
 
 ### Bước 2: Cài đặt môi trường Python

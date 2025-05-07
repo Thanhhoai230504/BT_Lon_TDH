@@ -12,6 +12,7 @@ def job_tra_cuu():
     tra_cuu_phat_nguoi(bien_so)
     print(f"Đã tra cứu vi phạm xe {bien_so}")
 
+# Set lịch chạy 6h sáng và 12h trưa hằng ngày.
 schedule.every().day.at("06:00").do(job_tra_cuu)
 schedule.every().day.at("12:00").do(job_tra_cuu)
 
