@@ -131,7 +131,6 @@ tra-cuu-phat-nguoi/
 
 ## 5. Ghi chú
 
-- Nếu OCR không nhận diện chính xác captcha, hãy kiểm tra ảnh gốc và ảnh đã xử lý (`original_captcha.png` và `processed_captcha.png`) để tinh chỉnh các bước xử lý ảnh.
 - Đảm bảo kết nối internet ổn định khi chạy chương trình.
 - Nếu gặp lỗi liên quan đến ChromeDriver, hãy kiểm tra phiên bản ChromeDriver và Google Chrome để đảm bảo chúng tương thích.
 
